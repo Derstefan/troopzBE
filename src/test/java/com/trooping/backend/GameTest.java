@@ -57,10 +57,10 @@ public class GameTest {
          map.addLocation(village1);
          map.addLocation(town1);
 
-         Troop troop1 = new Troop("troop1",new Pos(0, 0), team1);
+         Troop troop1 = new Troop("troop1",new Pos(0, 0), team1, 100);
          troop1.addUnits(UnitType.cavalry, 10);
          troop1.addUnits(UnitType.swordsman, 10);
-         Troop troop2 = new Troop("troop2",new Pos(1, 4), team2);
+         Troop troop2 = new Troop("troop2",new Pos(1, 4), team2, 100);
          troop2.addUnits(UnitType.spearWarrior, 20);
          troop2.addUnits(UnitType.swordsman, 10);
 
@@ -68,6 +68,10 @@ public class GameTest {
 
          map.addTroop(troop1);
          map.addTroop(troop2);
+
+         troop1.updateBalance(20);
+         troop2.updateBalance(-10);
+
 
 
          return new Game(map, diplomacy);
