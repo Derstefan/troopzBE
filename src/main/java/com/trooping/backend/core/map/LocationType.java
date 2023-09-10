@@ -2,23 +2,30 @@ package com.trooping.backend.core.map;
 
 public enum LocationType {
     VILLAGE(
-        "Village"
+        "Village",
+        false
     ),
     TOWN(
-        "Town"
+        "Town",
+        false
     ),
     CITY(
-        "City"
+        "City",
+        false
     ),
     ENCAMPMENT(
-        "Encampment"
+        "Encampment",
+        true
     ),
     FORTRESS(
-        "Fortress"
+        "Fortress",
+        true
     );
 
     private final String name;
-    LocationType(String name) {
+    private final boolean recruitment;
+    LocationType(String name, boolean recruitment) {
         this.name = name;
+        this.recruitment = recruitment;
     };
 };
