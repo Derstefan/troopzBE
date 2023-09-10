@@ -1,10 +1,11 @@
 package com.trooping.backend.core.battle;
 
+import com.trooping.backend.core.general.Updatable;
 import com.trooping.backend.core.map.Pos;
 import com.trooping.backend.core.troop.Army;
 import com.trooping.backend.core.units.UnitType;
 
-public class Battle {
+public class Battle implements Updatable {
     private Army attacker;
     private Army defender;
     private Pos pos;
@@ -19,6 +20,7 @@ public class Battle {
 
 
     //returns true if battle is over
+    @Override
     public boolean update(float delta) {
         time += delta;
         boolean attackerLost = false;
