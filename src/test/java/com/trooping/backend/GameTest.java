@@ -2,6 +2,7 @@ package com.trooping.backend;
 
 import com.trooping.backend.core.Game;
 import com.trooping.backend.core.map.Location;
+import com.trooping.backend.core.map.LocationType;
 import com.trooping.backend.core.map.Map;
 import com.trooping.backend.core.map.Pos;
 import com.trooping.backend.core.team.Diplomacy;
@@ -51,8 +52,8 @@ public class GameTest {
          diplomacy.war(team1, team2);
 
          Map map = new Map(100, 100);
-         Location village1 = new Location("village1",new Pos(0, 10),team1);
-         Location town1 = new Location("town1",new Pos(-6.2f, 2),team2);
+         Location village1 = new Location("village1",new Pos(0, 10),team1, LocationType.VILLAGE);
+         Location town1 = new Location("town1",new Pos(-6.2f, 2),team2, LocationType.TOWN);
          map.addLocation(village1);
          map.addLocation(town1);
 
