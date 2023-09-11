@@ -1,40 +1,19 @@
 package com.trooping.backend.core.troop;
 
+import com.trooping.backend.core.units.Unit;
 import com.trooping.backend.core.units.UnitType;
+import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
+import java.util.List;
+@Data
 public class Army {
-    private HashMap<UnitType,Float> units = new HashMap<>();
+    private List<Unit> units = new ArrayList<>();
 
-    public float getNumber(UnitType unitType){
-        if(units.keySet().contains(unitType)) {
-            return units.get(unitType);
-        }
-        return 0;
-    }
-
-    public ArrayList<UnitType> getUnitTypes(){
-        return new ArrayList<>(units.keySet());
-    }
-
-    //returns true if number<=0
-    public boolean reduceNumber(UnitType unitType, float number){
-        units.put(unitType,units.get(unitType)-number);
-        if(units.get(unitType)<=0){
-            units.remove(unitType);
-            return true;
-        }
-        return false;
-    }
-
-    public void addUnits(UnitType unitType, float number){
-        if(units.keySet().contains(unitType)) {
-            units.put(unitType, units.get(unitType) + number);
-        }else{
-            units.put(unitType,number);
-        }
+    public void addUnit(UnitType unitType, float number){
+        units.stream()
+                .filter(unit -> unit.getUnitType() == unitType)
+                .forEach(unit -> unit.setQuantity(unit.getQuantity() + number));
     }
 
     //union of armies

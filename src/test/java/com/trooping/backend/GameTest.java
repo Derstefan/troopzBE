@@ -6,7 +6,6 @@ import com.trooping.backend.core.map.Map;
 import com.trooping.backend.core.map.Pos;
 import com.trooping.backend.core.team.Diplomacy;
 import com.trooping.backend.core.team.Team;
-import com.trooping.backend.core.troop.Army;
 import com.trooping.backend.core.troop.Troop;
 import com.trooping.backend.core.units.UnitType;
 import org.junit.jupiter.api.Test;
@@ -57,18 +56,18 @@ public class GameTest {
          map.addLocation(town1);
 
          Troop troop1 = new Troop("troop1",new Pos(0, 0), team1);
-         troop1.addUnits(UnitType.cavalry, 10);
-         troop1.addUnits(UnitType.swordsman, 10);
+         troop1.addUnit(UnitType.CAVALRY, 10);
+         troop1.addUnit(UnitType.SWORDSMAN, 10);
          Troop troop2 = new Troop("troop2",new Pos(1, 4), team2);
-         troop2.addUnits(UnitType.spearWarrior, 20);
-         troop2.addUnits(UnitType.swordsman, 10);
+         troop2.addUnit(UnitType.SPEAR_WARRIOR, 20);
+         troop2.addUnit(UnitType.SWORDSMAN, 10);
 
          troop1.setTarget(troop2);
 
          map.addTroop(troop1);
          map.addTroop(troop2);
 
-
+         assert new Pos(0,0).equals(new Pos(0,0));
          return new Game(map, diplomacy);
      }
 }
