@@ -5,7 +5,8 @@ import com.trooping.backend.core.map.Pos;
 import com.trooping.backend.core.troop.Army;
 import com.trooping.backend.core.units.Unit;
 import com.trooping.backend.core.units.UnitType;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class Battle implements Updatable {
     private final Army attacker;
     private final Army defender;
@@ -19,7 +20,7 @@ public class Battle implements Updatable {
         this.pos = pos;
     }
 
-    public boolean defendignUnitIsDefeated(Unit attackingUnit, Unit defendingUnit, float delta) {
+    public boolean defendingUnitIsDefeated(Unit attackingUnit, Unit defendingUnit, float delta) {
         UnitType attackingUnitType = attackingUnit.getUnitType();
         if (duration >= attackingUnitType.getAttackDelay()) {
             float attackMultiplier = attackingUnitType.getAttackMultiplierAgainst(defendingUnit.getUnitType());
@@ -38,18 +39,20 @@ public class Battle implements Updatable {
         boolean defenderLost = true;
         for (Unit attackingUnit : attacker.getUnits()) {
             for (Unit defendingUnit : defender.getUnits()) {
-                defenderLost = defenderLost && defendignUnitIsDefeated(attackingUnit, defendingUnit, delta);
+                defenderLost = defenderLost && defendingUnitIsDefeated(attackingUnit, defendingUnit, delta);
             }
         }
         //TODO: Is it on purpose, that the attacker attacks first, before the defender can strike back?
         for (Unit attackingUnit : defender.getUnits()) {
             for (Unit defendingUnit : attacker.getUnits()) {
-                attackerLost = attackerLost && defendignUnitIsDefeated(attackingUnit, defendingUnit, delta);
+                attackerLost = attackerLost && defendingUnitIsDefeated(attackingUnit, defendingUnit, delta);
             }
         }
-        System.out.println("battle is ongoing");
+        log.info("battle is ongoing");
         if (attackerLost || defenderLost) {
-            System.out.println("battle is over");
+            log.info("Battle ended!");
+            log.info("ATTACKER:\n{}",attacker.getUnits());
+            log.info("DEFENDER:\n{}",defender.getUnits());
             return true;
         }
         return false;

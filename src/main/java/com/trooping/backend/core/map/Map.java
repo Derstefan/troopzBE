@@ -2,14 +2,14 @@ package com.trooping.backend.core.map;
 
 import com.trooping.backend.core.battle.Battle;
 import com.trooping.backend.core.troop.Troop;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.UUID;
-
+@Slf4j
 public class Map {
-
-    private float width;
-    private float height;
+    private final float width;
+    private final float height;
 
     private ArrayList<Location> locations = new ArrayList<>();
     private ArrayList<Troop> troops = new ArrayList<>();
@@ -48,7 +48,9 @@ public class Map {
     }
 
     public void startBattle(Troop attacker, Troop defender, Pos pos){
-        System.out.println("battle started");
+        log.info("Battle started between {} and {} at location {}", attacker.getTeam(), defender.getTeam(), pos);
+        log.info("ATTACKER:\n{}",attacker.getArmy());
+        log.info("DEFENDER:\n{}",defender.getArmy());
         battles.add(new Battle(attacker.getArmy(),defender.getArmy(),pos));
     }
 

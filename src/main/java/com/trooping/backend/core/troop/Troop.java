@@ -7,7 +7,9 @@ import com.trooping.backend.core.map.Pos;
 import com.trooping.backend.core.team.Team;
 import com.trooping.backend.core.units.UnitType;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Troop extends MapObject {
     //TODO: buffs
     @Getter

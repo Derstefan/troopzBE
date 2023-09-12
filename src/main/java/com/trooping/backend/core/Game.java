@@ -4,9 +4,10 @@ import com.trooping.backend.core.map.Map;
 import com.trooping.backend.core.map.Pos;
 import com.trooping.backend.core.team.Diplomacy;
 import com.trooping.backend.core.troop.Troop;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.UUID;
-
+@Slf4j
 public class Game {
 
     private Map map;

@@ -1,16 +1,10 @@
 package com.trooping.backend.core.troop;
 
+import lombok.Data;
+import lombok.NonNull;
+
+@Data
 public class TroopStats {
-
+    @NonNull
     private float speed;
-    //some more
-
-
-    public TroopStats(float speed) {
-        this.speed = speed;
-    }
-
-    public float getSpeed() {
-        return speed;
-    }
 }
