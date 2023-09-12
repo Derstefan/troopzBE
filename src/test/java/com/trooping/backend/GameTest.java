@@ -71,9 +71,15 @@ public class GameTest {
 
          assert new Pos(0,0).equals(new Pos(0,0));
 
-         troop1.incorporateArmy(troop2.getArmy());
-         System.out.println(troop1.getArmy());
-         System.out.println(troop2.getArmy());
+         Troop troop3 = new Troop("troop3",new Pos(0, 0), team1);
+         troop3.addUnit(UnitType.CAVALRY, 10);
+         troop3.addUnit(UnitType.SWORDSMAN, 10);
+         Troop troop4 = new Troop("troop4",new Pos(0, 0), team1);
+         troop4.addUnit(UnitType.CAVALRY, 10);
+         troop4.addUnit(UnitType.SWORDSMAN, 10);
+         troop3.incorporateArmy(troop4.getArmy());
+         System.out.println(troop3.getArmy());
+         System.out.println(troop4.getArmy());
 
 
          return new Game(map, diplomacy);
