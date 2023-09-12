@@ -15,6 +15,4 @@ public class Army {
                 .filter(unit -> unit.getUnitType() == unitType)
                 .forEach(unit -> unit.setQuantity(unit.getQuantity() + number));
     }
-
-    //union of armies
 }

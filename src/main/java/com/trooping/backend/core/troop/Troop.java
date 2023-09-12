@@ -71,7 +71,7 @@ public class Troop extends MapObject {
         this.troopStats = troopStats;
     }
 
-
+    //FIXME: seems odd to just replicate the method form Army here
     public void addUnit(UnitType unitType, int amount) {
         army.addUnit(unitType, amount);
     }
@@ -85,8 +85,14 @@ public class Troop extends MapObject {
         setVec(target.getPos().minus(getPos()).normalized());
     }
 
+    //FIXME: Why is this private?
     private void setTargetPos(Pos targetPos) {
         this.targetPos = targetPos;
         setVec(targetPos.minus(getPos()).normalized());
+    }
+
+    public void incorporateArmy(Army army) {
+        army.getUnits().stream()
+            .forEach(unit -> this.army.addUnit(unit.getUnitType(), unit.getQuantity()));
     }
 }
