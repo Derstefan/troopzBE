@@ -33,6 +33,7 @@ public class Battle implements Updatable {
     @Override
     public boolean update(float delta) {
         duration += delta;
+        //FIXME: If instantiated like this, an attacker will never loose
         boolean attackerLost = false;
         boolean defenderLost = true;
         for (Unit attackingUnit : attacker.getUnits()) {
@@ -40,7 +41,7 @@ public class Battle implements Updatable {
                 defenderLost = defenderLost && defendignUnitIsDefeated(attackingUnit, defendingUnit, delta);
             }
         }
-
+        //TODO: Is it on purpose, that the attacker attacks first, before the defender can strike back?
         for (Unit attackingUnit : defender.getUnits()) {
             for (Unit defendingUnit : attacker.getUnits()) {
                 attackerLost = attackerLost && defendignUnitIsDefeated(attackingUnit, defendingUnit, delta);
