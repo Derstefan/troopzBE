@@ -58,9 +58,11 @@ public class GameTest {
          Troop troop1 = new Troop("troop1",new Pos(0, 0), team1);
          troop1.addUnit(UnitType.CAVALRY, 10);
          troop1.addUnit(UnitType.SWORDSMAN, 10);
+         System.out.println(troop1.getArmy());
          Troop troop2 = new Troop("troop2",new Pos(1, 4), team2);
          troop2.addUnit(UnitType.SPEAR_WARRIOR, 20);
          troop2.addUnit(UnitType.SWORDSMAN, 10);
+         System.out.println(troop2.getArmy());
 
          troop1.setTarget(troop2);
 
@@ -68,6 +70,12 @@ public class GameTest {
          map.addTroop(troop2);
 
          assert new Pos(0,0).equals(new Pos(0,0));
+
+         troop1.incorporateArmy(troop2.getArmy());
+         System.out.println(troop1.getArmy());
+         System.out.println(troop2.getArmy());
+
+
          return new Game(map, diplomacy);
      }
 }

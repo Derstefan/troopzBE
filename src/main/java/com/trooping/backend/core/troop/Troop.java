@@ -94,5 +94,6 @@ public class Troop extends MapObject {
     public void incorporateArmy(Army army) {
         army.getUnits().stream()
             .forEach(unit -> this.army.addUnit(unit.getUnitType(), unit.getQuantity()));
+        army.getUnits().clear();
     }
 }
