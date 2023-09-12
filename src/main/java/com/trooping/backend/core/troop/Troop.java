@@ -46,12 +46,12 @@ public class Troop extends MapObject {
 
         if (arrived && target != null) {
             //TODO: if neutral or own team?
-            if (target instanceof Troop && target.getTeam() != getTeam()) {
-                map.startBattle(this, (Troop) target, getPos());
+            if (target instanceof Troop && target.getTeam() != this.getTeam()) {
+                map.startBattle(this, (Troop) target, this.getPos());
             }
             //TODO: what happens if neutral or own team location?
-            if (target instanceof Location && target.getTeam() != getTeam()) {
-                map.startBattle(this, (Location) target, getPos());
+            if (target instanceof Location && target.getTeam() != this.getTeam()) {
+                map.startBattle(this, (Location) target, this.getPos());
             }
         }
     }

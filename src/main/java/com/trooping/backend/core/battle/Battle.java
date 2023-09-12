@@ -19,12 +19,13 @@ public class Battle implements Updatable {
         this.pos = pos;
     }
 
-    public boolean willTheDefendingUnitSurvive(Unit attackingUnit, Unit defendingUnit, float delta) {
+    public boolean defendignUnitIsDefeated(Unit attackingUnit, Unit defendingUnit, float delta) {
         UnitType attackingUnitType = attackingUnit.getUnitType();
         if (duration >= attackingUnitType.getAttackDelay()) {
             float attackMultiplier = attackingUnitType.getAttackMultiplierAgainst(defendingUnit.getUnitType());
             float quantity = attackingUnit.getQuantity();
-            defendingUnit.reduceQuantityBy(quantity * attackMultiplier * delta);
+            float effectiveAttack = quantity * attackMultiplier * delta;
+            defendingUnit.reduceQuantityBy(effectiveAttack);
         }
         return defendingUnit.isDefeated();
     }
@@ -36,13 +37,13 @@ public class Battle implements Updatable {
         boolean defenderLost = true;
         for (Unit attackingUnit : attacker.getUnits()) {
             for (Unit defendingUnit : defender.getUnits()) {
-                defenderLost = defenderLost && willTheDefendingUnitSurvive(attackingUnit, defendingUnit, delta);
+                defenderLost = defenderLost && defendignUnitIsDefeated(attackingUnit, defendingUnit, delta);
             }
         }
 
         for (Unit attackingUnit : defender.getUnits()) {
             for (Unit defendingUnit : attacker.getUnits()) {
-                attackerLost = attackerLost && willTheDefendingUnitSurvive(attackingUnit, defendingUnit, delta);
+                attackerLost = attackerLost && defendignUnitIsDefeated(attackingUnit, defendingUnit, delta);
             }
         }
         System.out.println("battle is ongoing");
@@ -53,7 +54,4 @@ public class Battle implements Updatable {
         return false;
     }
 
-    public Pos getPos() {
-        return pos;
-    }
 }
