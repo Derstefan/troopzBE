@@ -19,10 +19,11 @@ public class Troop extends MapObject {
 
     private Pos targetPos;
     private MapObject target;// move to this and compute each update the vec, if null just move constant to vec
-
-    public Troop(String name, Pos pos, Team team) {
+    private int balance;
+    public Troop(String name, Pos pos, Team team, int balance) {
         super(name,pos,team);
         this.army = new Army();
+        this.balance = balance;
     }
     private boolean move(float delta) {
         float speed = troopStats.getSpeed();
@@ -37,6 +38,10 @@ public class Troop extends MapObject {
         }
         setPos(getPos().add(vec.times(speed*delta)));
         return false;
+    }
+
+    public void updateBalance(int amount) {
+        balance += amount;
     }
 
     public void update(float delta, Map map) {
@@ -100,4 +105,6 @@ public class Troop extends MapObject {
     public Army getArmy() {
         return army;
     }
+
+    public int getBalance() { return balance; };
 }
