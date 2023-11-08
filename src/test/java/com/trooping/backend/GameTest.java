@@ -7,7 +7,6 @@ import com.trooping.backend.core.map.Map;
 import com.trooping.backend.core.map.Pos;
 import com.trooping.backend.core.team.Diplomacy;
 import com.trooping.backend.core.team.Team;
-import com.trooping.backend.core.troop.Army;
 import com.trooping.backend.core.troop.Troop;
 import com.trooping.backend.core.units.UnitType;
 import org.junit.jupiter.api.Test;
@@ -57,20 +56,34 @@ public class GameTest {
          map.addLocation(village1);
          map.addLocation(town1);
 
-         Troop troop1 = new Troop("troop1",new Pos(0, 0), team1, 100);
-         troop1.addUnits(UnitType.cavalry, 10);
-         troop1.addUnits(UnitType.swordsman, 10);
-         Troop troop2 = new Troop("troop2",new Pos(1, 4), team2, 100);
-         troop2.addUnits(UnitType.spearWarrior, 20);
-         troop2.addUnits(UnitType.swordsman, 10);
+
+         Troop troop1 = new Troop("troop1",new Pos(0, 0), team1);
+         troop1.addUnit(UnitType.CAVALRY, 10);
+         troop1.addUnit(UnitType.SWORDSMAN, 10);
+         System.out.println(troop1.getArmy());
+         Troop troop2 = new Troop("troop2",new Pos(1, 4), team2);
+         troop2.addUnit(UnitType.SPEAR_WARRIOR, 20);
+         troop2.addUnit(UnitType.SWORDSMAN, 10);
+         System.out.println(troop2.getArmy());
+
 
          troop1.setTarget(troop2);
 
          map.addTroop(troop1);
          map.addTroop(troop2);
 
-         troop1.updateBalance(20);
-         troop2.updateBalance(-10);
+
+         assert new Pos(0,0).equals(new Pos(0,0));
+
+         Troop troop3 = new Troop("troop3",new Pos(0, 0), team1);
+         troop3.addUnit(UnitType.CAVALRY, 10);
+         troop3.addUnit(UnitType.SWORDSMAN, 10);
+         Troop troop4 = new Troop("troop4",new Pos(0, 0), team1);
+         troop4.addUnit(UnitType.CAVALRY, 10);
+         troop4.addUnit(UnitType.SWORDSMAN, 10);
+         troop3.incorporateArmy(troop4.getArmy());
+         System.out.println(troop3.getArmy());
+         System.out.println(troop4.getArmy());
 
 
 

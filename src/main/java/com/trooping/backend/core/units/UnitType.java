@@ -5,18 +5,18 @@ import java.util.List;
 
 public enum UnitType {
 
-    cavalry(
+    CAVALRY(
             "cavalry",
             1.5f,
             1,
             Arrays.asList(1f,1.5f,1f)
     ),
-    swordsman(
+    SWORDSMAN(
             "swordsman",
             1,
             2,
             Arrays.asList(1f,1f,1.3f)),
-    spearWarrior(
+    SPEAR_WARRIOR(
             "spear warrior",
             1.2f,
             2,
@@ -47,14 +47,7 @@ public enum UnitType {
         return attackDelay;
     }
 
-    public float getAttackMultiplier(UnitType unitType) {
+    public float getAttackMultiplierAgainst(UnitType unitType) {
         return attackMultipliers.get(unitType.ordinal());
-    }
-
-    public float attMultiplier(UnitType unitType, float time) {
-        if(time>=attackDelay) {
-            return attackMultipliers.get(unitType.ordinal());
-        }
-        return 0;
     }
 }

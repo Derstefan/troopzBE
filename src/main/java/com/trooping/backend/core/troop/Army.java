@@ -1,41 +1,31 @@
 package com.trooping.backend.core.troop;
 
+import com.trooping.backend.core.units.Unit;
 import com.trooping.backend.core.units.UnitType;
+import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
+@Data
 public class Army {
-    private HashMap<UnitType,Float> units = new HashMap<>();
+    private List<Unit> units = new ArrayList<>();
 
-    public float getNumber(UnitType unitType){
-        if(units.keySet().contains(unitType)) {
-            return units.get(unitType);
-        }
-        return 0;
-    }
+    public void addUnit(UnitType unitType, float number) {
+        // Find existing units of the same unitType
+        Optional<Unit> existingUnit = units.stream()
+            .filter(unit -> unit.getUnitType() == unitType)
+            .findFirst();
 
-    public ArrayList<UnitType> getUnitTypes(){
-        return new ArrayList<>(units.keySet());
-    }
-
-    //returns true if number<=0
-    public boolean reduceNumber(UnitType unitType, float number){
-        units.put(unitType,units.get(unitType)-number);
-        if(units.get(unitType)<=0){
-            units.remove(unitType);
-            return true;
-        }
-        return false;
-    }
-
-    public void addUnits(UnitType unitType, float number){
-        if(units.keySet().contains(unitType)) {
-            units.put(unitType, units.get(unitType) + number);
-        }else{
-            units.put(unitType,number);
+        if (existingUnit.isPresent()) {
+            // If an existing unit of the same type is found, update its quantity
+            Unit unit = existingUnit.get();
+            unit.setQuantity(unit.getQuantity() + number);
+        } else {
+            // If no existing unit of the same type is found, create a new unit
+            Unit newUnit = new Unit(unitType, number);
+            units.add(newUnit);
         }
     }
-
-    //union of armies
 }

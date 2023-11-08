@@ -1,10 +1,8 @@
 package com.trooping.backend.core.troop;
 
 import lombok.Data;
-import lombok.NonNull;
 
 @Data
-public class TroopStats {
-    @NonNull
+public class TroopStatsLombock {
     private float speed;
 }
